@@ -39,6 +39,7 @@ class Database:
         db_collection = Database._db[collection]
         return db_collection.update_one(filter_doc, {"$set": update_doc})
 
+    # This aggregates all avg, min, max in a single document are returns.
     def get_aggregate(self, collection, agg_for_field, agg_field):
         db_collection = Database._db[collection]
         return db_collection.aggregate([

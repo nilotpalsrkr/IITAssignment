@@ -196,24 +196,3 @@ class DailyReportModel:
         return self._db.get_report_for_date_range(DailyReportModel.DAILY_REPORTS, device_id, start_datetime, end_datetime)
 
 
-
-class Pipeline:
-
-    def pipleine_for_aggregated_data(self, agg_for_field, agg_field):
-        return (
-            {
-                '$group': {
-                    '_id': agg_for_field,
-                    'avg': {
-                        '$avg': agg_field
-                    },
-                    'min': {
-                        '$min': agg_field
-                    },
-                    'max': {
-                        '$max': agg_field
-                    }
-                }
-            }
-        )
-

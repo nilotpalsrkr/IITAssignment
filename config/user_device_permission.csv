@@ -1,3 +1,4 @@
 admin,DT001__rw;DT002__rw
 user_1,DT001__r;DT002__r
 user_2,DT003__rw;DT004__rw
+admin,DT004__r

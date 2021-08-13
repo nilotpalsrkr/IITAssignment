@@ -150,13 +150,16 @@ class DailyReportController(Authorization):
         self.check_admin(self.__login_user)
         return self.__daily_report_model.aggregate_for_each_device()
 
+    # This saves the average for all devices in mongo. But if the aggregate data already present in collection, then
+    # a DuplicateKeyError exception is raised.
     def save_average_for_all_devices(self):
         self.check_admin(self.__login_user)
         try:
             count_saved = self.__daily_report_model.save_aggregate_for_each_device_daily()
             print(f"'daily_reports' collection saved with {count_saved} documents")
         except DuplicateKeyError as err:
-            self._latest_error = f"The report has already run for this day. Either you drop the 'daily_report' collection to retest or can skip the run {err}"
+            self._latest_error = f"The report has already run for this day. Either you drop the 'daily_report' " \
+                                 f"collection to retest or can skip the run {err} "
             return -1
 
     def get_report_for_device_date_range(self, device_id, start_datetime, end_datetime):
